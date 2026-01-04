@@ -7,7 +7,6 @@ import javax.validation.constraints.Min;
 @Data
 public class ReviewDTO {
     private Long eventId;
-    private Long userId;
     @Min(1) @Max(5)
     private int rating;
     private String comment;
