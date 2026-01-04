@@ -19,11 +19,8 @@ public class EventDTO {
     @Min(value = 1, message = "Prețul trebuie să fie mai mare decat zero")
     private double ticketPrice;
 
-    @NotNull(message = "ID-ul locației este obligatoriu")
-    private Long locationId;
-
-    @NotNull(message = "ID-ul categoriei este obligatoriu")
-    private Long categoryId;
+    private String locationName;
+    private String categoryName;
 
     public String getTitle() {
         return title;
@@ -57,19 +54,19 @@ public class EventDTO {
         this.ticketPrice = ticketPrice;
     }
 
-    public Long getLocationId() {
-        return locationId;
+    public String getLocationName() {
+        return locationName;
     }
 
-    public void setLocationId(Long locationId) {
-        this.locationId = locationId;
+    public void setLocationName(String locationName) {
+        this.locationName = locationName;
     }
 
-    public Long getCategoryId() {
-        return categoryId;
+    public String getCategoryName() {
+        return categoryName;
     }
 
-    public void setCategoryId(Long categoryId) {
-        this.categoryId = categoryId;
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
     }
 }

@@ -6,9 +6,6 @@ import javax.validation.constraints.NotNull;
 
 @Data
 public class ReservationDTO {
-    @NotNull(message = "ID-ul utilizatorului este obligatoriu")
-    private Long userId;
-
     @NotNull(message = "ID-ul evenimentului este obligatoriu")
     private Long eventId;
 

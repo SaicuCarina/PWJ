@@ -36,10 +36,11 @@ public class EventService {
         dto.setTicketPrice(event.getTicketPrice());
 
         if (event.getLocation() != null) {
-            dto.setLocationId(event.getLocation().getId());
+            dto.setLocationName(event.getLocation().getName());
         }
+
         if (event.getCategory() != null) {
-            dto.setCategoryId(event.getCategory().getId());
+            dto.setCategoryName(event.getCategory().getName());
         }
 
         return dto;
