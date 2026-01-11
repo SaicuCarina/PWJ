@@ -2,6 +2,7 @@ package com.example.proiect_pwj.service;
 
 import com.example.proiect_pwj.config.UserSession;
 import com.example.proiect_pwj.dto.AuthDTO;
+import com.example.proiect_pwj.dto.UserDTO;
 import com.example.proiect_pwj.model.User;
 import com.example.proiect_pwj.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,5 +25,18 @@ public class UserService {
         String token = UUID.randomUUID().toString();
         userSession.addSession(token, user);
         return token;
+    }
+
+    public User register(UserDTO dto) {
+        if (userRepository.findByEmail(dto.getEmail()).isPresent()) {
+            throw new RuntimeException("Acest email este deja inregistrat!");
+        }
+
+        User user = new User();
+        user.setFullName(dto.getFullName());
+        user.setEmail(dto.getEmail());
+        user.setPassword(dto.getPassword());
+
+        return userRepository.save(user);
     }
 }

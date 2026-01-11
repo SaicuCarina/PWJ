@@ -16,4 +16,9 @@ public class AuthController {
     public String login(@RequestBody AuthDTO authDTO) {
         return userService.login(authDTO);
     }
+
+    @PostMapping("/register")
+    public com.example.proiect_pwj.model.User register(@RequestBody com.example.proiect_pwj.dto.UserDTO userDTO) {
+        return userService.register(userDTO);
+    }
 }
