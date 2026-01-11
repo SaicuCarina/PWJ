@@ -1,6 +1,7 @@
 package com.example.proiect_pwj.controller;
 
 import com.example.proiect_pwj.dto.ReservationDTO;
+import com.example.proiect_pwj.dto.ReservationResponseDTO;
 import com.example.proiect_pwj.model.Reservation;
 import com.example.proiect_pwj.service.ReservationService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,12 +24,17 @@ public class ReservationController {
     }
 
     @GetMapping("/my")
-    public ResponseEntity<?> getMy(@RequestHeader("Authorization") String token) {
+    public List<ReservationResponseDTO> getMyReservations(@RequestHeader("Authorization") String token) {
+        return reservationService.getMyReservations(token);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> cancel(@PathVariable Long id, @RequestHeader("Authorization") String token) {
         try {
-            List<ReservationDTO> myReservations = reservationService.getMyReservations(token);
-            return ResponseEntity.ok(myReservations);
+            reservationService.cancelReservation(id, token);
+            return ResponseEntity.ok("Rezervarea cu ID-ul " + id + " a fost anulata cu succes. Locurile au fost eliberate.");
         } catch (Exception e) {
-            return ResponseEntity.status(401).body(e.getMessage());
+            return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
 }

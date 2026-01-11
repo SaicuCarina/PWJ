@@ -27,4 +27,10 @@ public class EventController {
 
     @GetMapping("/upcoming")
     public ResponseEntity<List<EventDTO>> getUpcoming() { return ResponseEntity.ok(eventService.getUpcomingEvents()); }
+
+    @GetMapping("/search")
+    public List<EventDTO> search(@RequestParam(required = false) String category,
+                                 @RequestParam(required = false) String location) {
+        return eventService.searchEvents(category, location);
+    }
 }

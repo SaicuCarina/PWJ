@@ -55,4 +55,19 @@ public class EventService {
                 .map(this::convertToDTO)
                 .collect(java.util.stream.Collectors.toList());
     }
+
+    public List<EventDTO> searchEvents(String category, String location) {
+        String cat = (category != null) ? category : "";
+        String loc = (location != null) ? location : "";
+
+        List<Event> events = eventRepository.findByCategoryNameContainingAndLocationNameContaining(cat, loc);
+
+        if (events.isEmpty()) {
+            throw new RuntimeException("Nu a fost gasit niciun eveniment pentru criteriile selectate.");
+        }
+
+        return events.stream()
+                .map(this::convertToDTO)
+                .collect(Collectors.toList());
+    }
 }
