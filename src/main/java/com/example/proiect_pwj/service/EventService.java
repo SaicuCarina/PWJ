@@ -6,6 +6,7 @@ import com.example.proiect_pwj.repository.EventRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -44,5 +45,14 @@ public class EventService {
         }
 
         return dto;
+    }
+
+    public List<EventDTO> getUpcomingEvents() {
+        LocalDateTime now = LocalDateTime.now();
+        List<Event> events = eventRepository.findByDateTimeAfterOrderByDateTimeAsc(now);
+
+        return events.stream()
+                .map(this::convertToDTO)
+                .collect(java.util.stream.Collectors.toList());
     }
 }

@@ -1,5 +1,6 @@
 package com.example.proiect_pwj.repository;
 
+import com.example.proiect_pwj.model.Event;
 import com.example.proiect_pwj.model.Reservation;
 import com.example.proiect_pwj.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -9,4 +10,5 @@ import java.util.List;
 @Repository
 public interface ReservationRepository extends JpaRepository<Reservation, Long> {
     List<Reservation> findByUser(User user);
+    boolean existsByUserAndEvent(User user, Event event);
 }

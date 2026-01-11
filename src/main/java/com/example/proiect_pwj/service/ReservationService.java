@@ -26,6 +26,10 @@ public class ReservationService {
         Event event = eventRepository.findById(dto.getEventId())
                 .orElseThrow(() -> new RuntimeException("Eveniment negasit"));
 
+        if (event.getDateTime().isBefore(java.time.LocalDateTime.now())) {
+            throw new RuntimeException("Nu poti rezerva locuri la un eveniment care a trecut deja!");
+        }
+
         if (event.getAvailableSeats() < dto.getNumberOfTickets()) {
             throw new RuntimeException("Nu sunt destule locuri libere");
         }
