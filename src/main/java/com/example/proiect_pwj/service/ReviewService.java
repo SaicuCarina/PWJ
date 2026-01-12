@@ -20,7 +20,7 @@ public class ReviewService {
     @Autowired private ReservationRepository reservationRepository;
     @Autowired private UserSession userSession;
 
-    public Review addReview(ReviewDTO dto, String token) {
+    public ReviewDTO addReview(ReviewDTO dto, String token) {
         User user = userSession.getUser(token);
         if (user == null) {
             throw new RuntimeException("Trebuie să fii logat pentru a lasa un review!");
@@ -44,7 +44,14 @@ public class ReviewService {
         review.setRating(dto.getRating());
         review.setComment(dto.getComment());
 
-        return reviewRepository.save(review);
+        Review savedReview = reviewRepository.save(review);
+
+        ReviewDTO responseDTO = new ReviewDTO();
+        responseDTO.setEventId(savedReview.getEvent().getId());
+        responseDTO.setRating(savedReview.getRating());
+        responseDTO.setComment(savedReview.getComment());
+
+        return responseDTO;
     }
     public List<ReviewDTO> getReviewsByEvent(Long eventId) {
         Event event = eventRepository.findById(eventId)
