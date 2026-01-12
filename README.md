@@ -38,7 +38,7 @@ Bază de date: MySQL (6 entități: User, Event, Reservation, Review, Location, 
 
 Arhitectură: Layered Architecture (Controller -> Service -> Repository).
 
-## IV. IV. GESTIUNEA ERORILOR (EXCEPȚII ȘI CODURI HTTP)
+## IV. GESTIUNEA ERORILOR (EXCEPȚII ȘI CODURI HTTP)
 Aplicația folosește un sistem de validare, interceptat de GlobalExceptionHandler, care mapează excepțiile de tip RuntimeException pe coduri de stare HTTP specifice:
 
 🔑 Utilizatori & Securitate
