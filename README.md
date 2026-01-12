@@ -38,40 +38,47 @@ Bază de date: MySQL (6 entități: User, Event, Reservation, Review, Location, 
 
 Arhitectură: Layered Architecture (Controller -> Service -> Repository).
 
-## IV. GESTIUNEA ERORILOR
-Aplicația folosește un sistem de validare riguros, aruncând RuntimeException cu mesaje specifice pentru următoarele scenarii:
+## IV. IV. GESTIUNEA ERORILOR (EXCEPȚII ȘI CODURI HTTP)
+Aplicația folosește un sistem de validare, interceptat de GlobalExceptionHandler, care mapează excepțiile de tip RuntimeException pe coduri de stare HTTP specifice:
 
 🔑 Utilizatori & Securitate
-"Sesiune expirata! Te rugam sa te reloghezi." / "Sesiune expirata!" (Când token-ul este invalid).
 
-"Email inexistent" (La login, dacă adresa nu se găsește).
+"Sesiune expirata! Te rugam sa te reloghezi." / "Sesiune expirata!" (401 Unauthorized)
 
-"Parola incorecta" (Dacă parola nu corespunde cu cea din baza de date).
+"Email inexistent" (404 Not Found)
 
-"Acest email este deja inregistrat!" (La register, dacă email-ul este duplicat).
+"Parola incorecta" (401 Unauthorized)
 
-"Trebuie să fii logat pentru a lasa un review!" (Acces neautorizat la recenzii).
+"Acest email este deja inregistrat!" (400 Bad Request)
+
+"Trebuie să fii logat pentru a lasa un review!" (401 Unauthorized)
 
 📅 Evenimente
-"Evenimentul nu a fost gasit" / "Eveniment negasit" / "Evenimentul nu exista" (Căutare după ID invalid).
 
-"Nu a fost gasit niciun eveniment pentru criteriile selectate." (Dacă search-ul nu returnează rezultate).
+"Evenimentul nu a fost gasit" / "Eveniment negasit" / "Evenimentul nu exista" (404 Not Found)
+
+"Nu a fost gasit niciun eveniment pentru criteriile selectate." (404 Not Found - gestionat prin logica de căutare)
 
 🎟️ Rezervări
-"Nu poti rezerva locuri la un eveniment care a trecut deja!" (Validare dată rezervare).
 
-"Nu sunt destule locuri libere" (Validare stoc/capacitate).
+"Nu poti rezerva locuri la un eveniment care a trecut deja!" (400 Bad Request)
 
-"Rezervarea nu a fost gasita" (La anularea unui ID invalid).
+"Nu sunt destule locuri libere" (400 Bad Request)
 
-"Nu poti anula rezervarea altcuiva!" (Protecția datelor între utilizatori).
+"Rezervarea nu a fost gasita" (404 Not Found)
 
-"Nu poti anula o rezervare pentru un eveniment care a trecut deja!" (Limitare anulare post-eveniment).
+"Nu poti anula rezervarea altcuiva!" (400 Bad Request - Fallback)
+
+"Nu poti anula o rezervare pentru un eveniment care a trecut deja!" (400 Bad Request)
 
 ⭐ Review-uri
-"Nu poți lasa un review pentru un eveniment care nu a avut loc inca!" (Blocare feedback prematur).
 
-"Doar persoanele care au rezervat bilete pot lasa un review!" (Validare participare prin rezervare).
+"Nu poți lasa un review pentru un eveniment care nu a avut loc inca!" (400 Bad Request)
+
+"Doar persoanele care au rezervat bilete pot lasa un review!" (400 Bad Request)
+
+
+Toate aceste mesaje sunt procesate prin metoda handleRuntimeException, care scanează conținutul mesajului excepției folosind .contains() și returnează un obiect de tip ResponseEntity<String> cu statusul corespunzător. Această abordare asigură că frontend-ul sau clientul de API (Postman) primește un feedback clar și standardizat pentru orice eroare de business întâlnită.
 
 ## V. TESTARE ȘI DOCUMENTAȚIE
 ✅ Unit Tests: Realizate cu JUnit 5 și Mockito (acoperire pe Service-uri).
