@@ -83,6 +83,16 @@ Toate aceste mesaje sunt procesate prin metoda handleRuntimeException, care scan
 ## V. TESTARE ȘI DOCUMENTAȚIE
 ✅ Unit Tests: Realizate cu JUnit 5 și Mockito (acoperire pe Service-uri).
 
-📜 Swagger UI: Documentație API generată automat la: http://localhost:8080/swagger-ui/index.html.
+<img alt="{965F458E-9D4F-4E93-8BFD-E968350479CD}" src="https://github.com/user-attachments/assets/4b0604fb-b962-464d-aa52-88eeacd3ea62" />
 
-📡 Postman: Colecție configurată cu variabile de mediu ({{token}}) pentru demonstrație live.
+
+
+📜 Swagger UI
+
+<img width="749" height="443" alt="{09EEB8FF-8811-4708-8341-27D61D95B38E}" src="https://github.com/user-attachments/assets/400593fd-973d-465f-8573-1e634f698967" />
+
+
+📡 Postman: Colecție configurată cu variabile de mediu ({{token}})
+
+<img alt="{7EE21EB7-FB68-47C4-ABB0-179734D4BE9B}" src="https://github.com/user-attachments/assets/41b53c6e-553b-4f84-8de9-a5541e44368b" />
+
