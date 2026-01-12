@@ -1,5 +1,5 @@
 # Sistem de Gestiune Rezervări Evenimente
-## I. REGULI DE BUSINESS (10 CERINȚE)
+## I. REGULI DE BUSINESS
 [1] Unicitate Cont: Înregistrarea necesită un email unic; sistemul verifică baza de date înainte de a crea un utilizator nou.
 
 [2] Securitate Token-Based: Doar utilizatorii autentificați (cu token valid) pot accesa funcțiile de rezervare și review.
