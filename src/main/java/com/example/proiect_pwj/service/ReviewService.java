@@ -23,14 +23,14 @@ public class ReviewService {
     public ReviewDTO addReview(ReviewDTO dto, String token) {
         User user = userSession.getUser(token);
         if (user == null) {
-            throw new RuntimeException("Trebuie să fii logat pentru a lasa un review!");
+            throw new RuntimeException("Trebuie sa fii logat pentru a lasa un review!");
         }
 
         Event event = eventRepository.findById(dto.getEventId())
                 .orElseThrow(() -> new RuntimeException("Evenimentul nu exista"));
 
         if (event.getDateTime().isAfter(java.time.LocalDateTime.now())) {
-            throw new RuntimeException("Nu poți lasa un review pentru un eveniment care nu a avut loc inca!");
+            throw new RuntimeException("Nu poti lasa un review pentru un eveniment care nu a avut loc inca!");
         }
 
         boolean hasReservation = reservationRepository.existsByUserAndEvent(user, event);
