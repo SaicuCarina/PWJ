@@ -36,6 +36,8 @@ Backend: Java 17 cu Spring Boot.
 
 Bază de date: MySQL (6 entități: User, Event, Reservation, Review, Location, Category).
 
+<img alt="{314F2154-C696-4DCF-9F02-32BEB0809B3C}" src="https://github.com/user-attachments/assets/5609b48a-b27d-4808-a326-7a71b63ec573" />
+
 Arhitectură: Layered Architecture (Controller -> Service -> Repository).
 
 ## IV. GESTIUNEA ERORILOR (EXCEPȚII ȘI CODURI HTTP)
